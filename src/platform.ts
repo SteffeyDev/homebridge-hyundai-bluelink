@@ -79,7 +79,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
                     (accessory) => accessory.UUID === uuid
                 )
                 const vehicle = client.getVehicle(vin)
-                this.log.debug('Vehicle found', vehicle)
+                this.log.debug('Vehicle found', vehicle?.vehicleConfig)
                 if (existingAccessory) {
                     // the accessory already exists
                     if (vehicle) {
