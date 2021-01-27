@@ -139,5 +139,21 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
                 }
             }
         })
+        const uuids = this.config.vehicles?.map((v) =>
+            this.api.hap.uuid.generate(v)
+        )
+        for (const accessory of this.accessories) {
+            if (!uuids?.includes(accessory.UUID)) {
+                this.api.unregisterPlatformAccessories(
+                    PLUGIN_NAME,
+                    PLATFORM_NAME,
+                    [accessory]
+                )
+                this.log.info(
+                    'Removing existing accessory from cache:',
+                    accessory.displayName
+                )
+            }
+        }
     }
 }
