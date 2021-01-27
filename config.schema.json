@@ -5,11 +5,40 @@
     "schema": {
         "type": "object",
         "properties": {
-            "name": {
-                "title": "Name",
+            "username": {
+                "title": "Username",
+                "type": "string",
+                "required": true
+            },
+            "password": {
+                "title": "Password",
+                "type": "string",
+                "required": true
+            },
+            "region": {
+                "title": "Region",
                 "type": "string",
                 "required": true,
-                "default": "Homebridge Hyundai BlueLink"
+                "placeholder": "US",
+                "oneOf": [
+                    { "title": "United States", "enum": ["US"] },
+                    { "title": "Canada", "enum": ["CA"] },
+                    { "title": "Europe", "enum": ["EU"] }
+                ]
+            },
+            "pin": {
+                "title": "Pin",
+                "type": "string",
+                "placeholder": "1234",
+                "required": true
+            },
+            "vehicles": {
+                "type": "array",
+                "items": {
+                    "title": "VIN Number",
+                    "type": "string",
+                    "required": true
+                }
             }
         }
     }
