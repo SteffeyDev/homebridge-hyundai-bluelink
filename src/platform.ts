@@ -11,7 +11,6 @@ import BlueLinky from 'bluelinky'
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings'
 import { ExamplePlatformAccessory } from './platformAccessory'
-import { runInThisContext } from 'vm'
 
 interface Config extends PlatformConfig {
     username?: string
@@ -55,7 +54,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
      * This function is invoked when homebridge restores cached accessories from disk at startup.
      * It should be used to setup event handlers for characteristics and update respective values.
      */
-    configureAccessory(accessory: PlatformAccessory) {
+    configureAccessory(accessory: PlatformAccessory): void {
         this.log.info('Loading accessory from cache:', accessory.displayName)
 
         // add the restored accessory to the accessories cache so we can track if it has already been registered
@@ -67,7 +66,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
      * Accessories must only be registered once, previously created accessories
      * must not be registered again to prevent "duplicate UUID" errors.
      */
-    discoverDevices() {
+    discoverDevices(): void {
         const client = new BlueLinky({
             username: this.config.username,
             password: this.config.password,

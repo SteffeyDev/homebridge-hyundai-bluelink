@@ -6,6 +6,6 @@ import { ExampleHomebridgePlatform } from './platform'
 /**
  * This method registers the platform with Homebridge
  */
-export = (api: API) => {
+export = (api: API): void => {
     api.registerPlatform(PLATFORM_NAME, ExampleHomebridgePlatform)
 }

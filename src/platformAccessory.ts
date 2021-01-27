@@ -31,8 +31,8 @@ export class ExamplePlatformAccessory {
     ) {
         // set accessory information
         this.accessory
-            .getService(this.platform.Service.AccessoryInformation)!
-            .setCharacteristic(
+            ?.getService(this.platform.Service.AccessoryInformation)
+            ?.setCharacteristic(
                 this.platform.Characteristic.Manufacturer,
                 'Default-Manufacturer'
             )
@@ -139,7 +139,10 @@ export class ExamplePlatformAccessory {
      * Handle "SET" requests from HomeKit
      * These are sent when the user changes the state of an accessory, for example, turning on a Light bulb.
      */
-    setOn(value: CharacteristicValue, callback: CharacteristicSetCallback) {
+    setOn(
+        value: CharacteristicValue,
+        callback: CharacteristicSetCallback
+    ): void {
         // implement your own code to turn your device on/off
         this.exampleStates.On = value as boolean
 
@@ -162,7 +165,7 @@ export class ExamplePlatformAccessory {
    * @example
    * this.service.updateCharacteristic(this.platform.Characteristic.On, true)
    */
-    getOn(callback: CharacteristicGetCallback) {
+    getOn(callback: CharacteristicGetCallback): void {
         // implement your own code to check if the device is on
         const isOn = this.exampleStates.On
 
@@ -181,7 +184,7 @@ export class ExamplePlatformAccessory {
     setBrightness(
         value: CharacteristicValue,
         callback: CharacteristicSetCallback
-    ) {
+    ): void {
         // implement your own code to set the brightness
         this.exampleStates.Brightness = value as number
 
