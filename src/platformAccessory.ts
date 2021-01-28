@@ -6,14 +6,8 @@ import {
     CharacteristicGetCallback,
 } from 'homebridge'
 
-import { ExampleHomebridgePlatform } from './platform'
-
-/**
- * Platform Accessory
- * An instance of this class is created for each accessory your platform registers
- * Each accessory may expose multiple services of different service types.
- */
-export class ExamplePlatformAccessory {
+import { HyundaiBluelink } from './platform'
+export class Vehicle {
     private service: Service
 
     /**
@@ -26,7 +20,7 @@ export class ExamplePlatformAccessory {
     }
 
     constructor(
-        private readonly platform: ExampleHomebridgePlatform,
+        private readonly platform: HyundaiBluelink,
         private readonly accessory: PlatformAccessory
     ) {
         // set accessory information

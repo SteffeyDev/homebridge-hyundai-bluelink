@@ -10,9 +10,9 @@ import {
 import BlueLinky from 'bluelinky'
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings'
-import { ExamplePlatformAccessory } from './platformAccessory'
+import { Vehicle } from './platformAccessory'
 
-interface Config extends PlatformConfig {
+interface HyundaiConfig extends PlatformConfig {
     username?: string
     password?: string
     pin?: string
@@ -24,7 +24,7 @@ interface Config extends PlatformConfig {
  * This class is the main constructor for your plugin, this is where you should
  * parse the user config and discover/register accessories with Homebridge.
  */
-export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
+export class HyundaiBluelink implements DynamicPlatformPlugin {
     public readonly Service: typeof Service = this.api.hap.Service
     public readonly Characteristic: typeof Characteristic = this.api.hap
         .Characteristic
@@ -34,7 +34,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
 
     constructor(
         public readonly log: Logger,
-        public readonly config: Config,
+        public readonly config: HyundaiConfig,
         public readonly api: API
     ) {
         this.log.debug('Finished initializing platform:', this.config.name)
@@ -92,7 +92,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
                         // this.api.updatePlatformAccessories([existingAccessory]);
                         // create the accessory handler for the restored accessory
                         // this is imported from `platformAccessory.ts`
-                        new ExamplePlatformAccessory(this, existingAccessory)
+                        new Vehicle(this, existingAccessory)
                         // update accessory cache with any changes to the accessory details and information
                         this.api.updatePlatformAccessories([existingAccessory])
                     } else if (!vehicle) {
@@ -128,7 +128,7 @@ export class ExampleHomebridgePlatform implements DynamicPlatformPlugin {
 
                     // create the accessory handler for the newly create accessory
                     // this is imported from `platformAccessory.ts`
-                    new ExamplePlatformAccessory(this, accessory)
+                    new Vehicle(this, accessory)
 
                     // link the accessory to your platform
                     this.api.registerPlatformAccessories(
