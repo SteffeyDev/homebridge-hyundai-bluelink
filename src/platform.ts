@@ -10,7 +10,8 @@ import {
 import BlueLinky from 'bluelinky'
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings'
-import { Vehicle } from './platformAccessory'
+import { VehicleAccessory } from './platformAccessory'
+import { BlueLinkyConfig } from 'bluelinky/dist/interfaces/common.interfaces'
 
 interface HyundaiConfig extends PlatformConfig {
     username?: string
@@ -19,12 +20,7 @@ interface HyundaiConfig extends PlatformConfig {
     region?: 'US' | 'CA' | 'EU'
     vehicles?: [string]
 }
-/**
- * HomebridgePlatform
- * This class is the main constructor for your plugin, this is where you should
- * parse the user config and discover/register accessories with Homebridge.
- */
-export class HyundaiBluelink implements DynamicPlatformPlugin {
+export class HyundaiPlatform implements DynamicPlatformPlugin {
     public readonly Service: typeof Service = this.api.hap.Service
     public readonly Characteristic: typeof Characteristic = this.api.hap
         .Characteristic
@@ -37,7 +33,7 @@ export class HyundaiBluelink implements DynamicPlatformPlugin {
         public readonly config: HyundaiConfig,
         public readonly api: API
     ) {
-        this.log.debug('Finished initializing platform:', this.config.name)
+        this.log.debug('Finished initializing platform:', this.config.platform)
         // When this event is fired it means Homebridge has restored all cached accessories from disk.
         // Dynamic Platform plugins should only register new accessories after this event was fired,
         // in order to ensure they weren't added to homebridge already. This event can also be used
@@ -92,7 +88,7 @@ export class HyundaiBluelink implements DynamicPlatformPlugin {
                         // this.api.updatePlatformAccessories([existingAccessory]);
                         // create the accessory handler for the restored accessory
                         // this is imported from `platformAccessory.ts`
-                        new Vehicle(this, existingAccessory)
+                        new VehicleAccessory(this, existingAccessory, vehicle)
                         // update accessory cache with any changes to the accessory details and information
                         this.api.updatePlatformAccessories([existingAccessory])
                     } else if (!vehicle) {
@@ -128,7 +124,7 @@ export class HyundaiBluelink implements DynamicPlatformPlugin {
 
                     // create the accessory handler for the newly create accessory
                     // this is imported from `platformAccessory.ts`
-                    new Vehicle(this, accessory)
+                    new VehicleAccessory(this, accessory, vehicle)
 
                     // link the accessory to your platform
                     this.api.registerPlatformAccessories(
