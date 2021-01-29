@@ -1,5 +1,5 @@
 {
-    "private": true,
+    "private": false,
     "displayName": "Homebridge Hyundai BlueLink",
     "name": "homebridge-hyundai-bluelink",
     "version": "1.0.0",
