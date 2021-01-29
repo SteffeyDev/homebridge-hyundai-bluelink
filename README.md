@@ -7,8 +7,8 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
 
 ## Installation
 
-1. Install homebridge using: npm install -g homebridge
-2. Install this plug-in using: npm install -g homebridge-hyundai-bluelink
+1. Install homebridge: `npm install -g homebridge`
+2. Install this plug-in: `npm install -g homebridge-hyundai-bluelink`
 3. Update your configuration file. See example config.json snippet below.
 
 ## Configuration
