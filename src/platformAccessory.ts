@@ -1,10 +1,9 @@
 import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 import { Vehicle } from 'bluelinky/dist/vehicles/vehicle'
-import { Service, PlatformAccessory } from 'homebridge'
+import { PlatformAccessory } from 'homebridge'
 
 import { HyundaiPlatform } from './platform'
-import { HyundaiService } from './services/base'
-import { Lock } from './services/lock'
+import { HyundaiService, Lock } from './services'
 export class VehicleAccessory {
     private interval = 10 * 1000
     private services: [HyundaiService]

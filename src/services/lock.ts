@@ -1,4 +1,4 @@
-import { HyundaiService } from './base'
+import { HyundaiService } from '.'
 import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 
 export class Lock extends HyundaiService {
@@ -10,9 +10,9 @@ export class Lock extends HyundaiService {
     initService(): void {
         const { LockCurrentState, LockTargetState } = this.Characteristic
 
-        this.service?.getCharacteristic(LockCurrentState).on('get', (cb) => {
-            cb(null, this.lockCurrentState)
-        })
+        this.service
+            ?.getCharacteristic(LockCurrentState)
+            .on('get', (cb) => cb(null, this.lockCurrentState))
 
         this.service
             ?.getCharacteristic(LockTargetState)

@@ -5,7 +5,15 @@ import { HyundaiPlatform } from '../platform'
 import { VehicleAccessory } from '../platformAccessory'
 
 export abstract class HyundaiService {
-    constructor(protected readonly platformAccessory: VehicleAccessory) {}
+    protected readonly accessory: PlatformAccessory = this.va.accessory
+    protected readonly vehicle: Vehicle = this.va.vehicle
+    protected readonly platform: HyundaiPlatform = this.va.platform
+    protected readonly Characteristic: typeof Characteristic = this.platform
+        .Characteristic
+    protected readonly log: Logger = this.platform.log
+
+    constructor(protected readonly va: VehicleAccessory) {}
+
     protected get service(): Service {
         return (
             this.accessory.getService(this.name) ||
@@ -15,21 +23,6 @@ export abstract class HyundaiService {
                 this.name
             )
         )
-    }
-    protected get accessory(): PlatformAccessory {
-        return this.platformAccessory.accessory
-    }
-    protected get vehicle(): Vehicle {
-        return this.platformAccessory.vehicle
-    }
-    protected get platform(): HyundaiPlatform {
-        return this.platformAccessory.platform
-    }
-    protected get Characteristic(): typeof Characteristic {
-        return this.platform.Characteristic
-    }
-    protected get log(): Logger {
-        return this.platform.log
     }
 
     abstract name: string
