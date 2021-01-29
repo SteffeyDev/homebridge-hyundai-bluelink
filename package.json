@@ -1,48 +1,48 @@
 {
-  "private": false,
-  "displayName": "Homebridge Hyundai BlueLink",
-  "name": "homebridge-hyundai-bluelink",
-  "version": "0.0.1",
-  "description": "Integrates with remote functionality for Hyundai cars.",
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/athal7/homebridge-hyundai-bluelink.git"
-  },
-  "bugs": {
-    "url": "https://github.com/athal7/homebridge-hyundai-bluelink/issues"
-  },
-  "engines": {
-    "node": ">=10.17.0",
-    "homebridge": ">=1.0.0"
-  },
-  "main": "dist/index.js",
-  "scripts": {
-    "lint": "eslint src/**.ts --max-warnings=0",
-    "watch": "npm run build && npm link && nodemon",
-    "build": "rimraf ./dist && tsc",
-    "prepublishOnly": "npm run lint && npm run build"
-  },
-  "keywords": [
-    "homebridge-plugin"
-  ],
-  "dependencies": {
-    "bluelinky": "^6.0.0-alpha2"
-  },
-  "devDependencies": {
-    "@types/node": "^14.14.6",
-    "@typescript-eslint/eslint-plugin": "^4.6.1",
-    "@typescript-eslint/parser": "^4.6.1",
-    "eslint": "^7.13.0",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "homebridge": "^1.2.3",
-    "nodemon": "^2.0.6",
-    "prettier": "^2.2.1",
-    "rimraf": "^3.0.2",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.5"
-  },
-  "homepage": "https://github.com/athal7/homebridge-hyundai-bluelink#readme",
-  "author": "Andrew Thal"
+    "private": false,
+    "displayName": "Homebridge Hyundai BlueLink",
+    "name": "homebridge-hyundai-bluelink",
+    "version": "0.0.2",
+    "description": "Integrates with remote functionality for Hyundai cars.",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/athal7/homebridge-hyundai-bluelink.git"
+    },
+    "bugs": {
+        "url": "https://github.com/athal7/homebridge-hyundai-bluelink/issues"
+    },
+    "engines": {
+        "node": ">=10.17.0",
+        "homebridge": ">=1.0.0"
+    },
+    "main": "dist/index.js",
+    "scripts": {
+        "lint": "eslint src/**.ts --max-warnings=0",
+        "watch": "npm run build && npm link && nodemon",
+        "build": "rimraf ./dist && tsc",
+        "prepublishOnly": "npm run lint && npm run build"
+    },
+    "keywords": [
+        "homebridge-plugin"
+    ],
+    "dependencies": {
+        "bluelinky": "^6.0.0-alpha2"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.6",
+        "@typescript-eslint/eslint-plugin": "^4.6.1",
+        "@typescript-eslint/parser": "^4.6.1",
+        "eslint": "^7.13.0",
+        "eslint-config-prettier": "^7.2.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "homebridge": "^1.2.3",
+        "nodemon": "^2.0.6",
+        "prettier": "^2.2.1",
+        "rimraf": "^3.0.2",
+        "ts-node": "^9.0.0",
+        "typescript": "^4.0.5"
+    },
+    "homepage": "https://github.com/athal7/homebridge-hyundai-bluelink#readme",
+    "author": "Andrew Thal"
 }
