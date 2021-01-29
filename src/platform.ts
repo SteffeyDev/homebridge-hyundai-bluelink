@@ -11,7 +11,6 @@ import BlueLinky from 'bluelinky'
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings'
 import { VehicleAccessory } from './platformAccessory'
-import { BlueLinkyConfig } from 'bluelinky/dist/interfaces/common.interfaces'
 
 interface HyundaiConfig extends PlatformConfig {
     username?: string
