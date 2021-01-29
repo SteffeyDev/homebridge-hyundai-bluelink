@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "Homebridge Hyundai BlueLink",
+    "pluginAlias": "Hyundai",
     "pluginType": "platform",
     "singular": true,
     "schema": {
