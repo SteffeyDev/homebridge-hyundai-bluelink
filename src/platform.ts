@@ -32,7 +32,6 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
         public readonly config: HyundaiConfig,
         public readonly api: API
     ) {
-        this.log.debug('Hyundai config:', this.config)
         // When this event is fired it means Homebridge has restored all cached accessories from disk.
         // Dynamic Platform plugins should only register new accessories after this event was fired,
         // in order to ensure they weren't added to homebridge already. This event can also be used
@@ -61,6 +60,8 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
      * must not be registered again to prevent "duplicate UUID" errors.
      */
     discoverDevices(): void {
+        this.log.debug('Hyundai config:', this.config)
+
         const client = new BlueLinky({
             username: this.config.username,
             password: this.config.password,
