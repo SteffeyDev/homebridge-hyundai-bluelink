@@ -32,7 +32,7 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
         public readonly config: HyundaiConfig,
         public readonly api: API
     ) {
-        this.log.debug('Finished initializing platform:', this.config.platform)
+        this.log.debug('Hyundai config:', this.config)
         // When this event is fired it means Homebridge has restored all cached accessories from disk.
         // Dynamic Platform plugins should only register new accessories after this event was fired,
         // in order to ensure they weren't added to homebridge already. This event can also be used
@@ -67,6 +67,7 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
             region: this.config.region,
             pin: this.config.pin,
         })
+        this.log.debug('Client:', client)
         client.on('ready', async () => {
             for (const vin of this.config.vehicles || []) {
                 const uuid = this.api.hap.uuid.generate(vin)
@@ -74,6 +75,7 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
                     (accessory) => accessory.UUID === uuid
                 )
                 const vehicle = client.getVehicle(vin)
+
                 this.log.debug('Vehicle found', vehicle?.vehicleConfig)
                 if (existingAccessory) {
                     // the accessory already exists
