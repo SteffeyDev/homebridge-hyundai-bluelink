@@ -23,7 +23,7 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
         "vehicles": [
             "your VIN"
         ],
-        "platform": "Homebridge Hyundai BlueLink"
+        "platform": "Hyundai"
     }
 ],
 ```
