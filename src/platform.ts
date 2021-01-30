@@ -75,9 +75,10 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
                 const existingAccessory = this.accessories.find(
                     (accessory) => accessory.UUID === uuid
                 )
+                this.log.debug('Fetching vehicle:', vin)
                 const vehicle = client.getVehicle(vin)
-
                 this.log.debug('Vehicle found', vehicle?.vehicleConfig)
+
                 if (existingAccessory) {
                     // the accessory already exists
                     if (vehicle) {
