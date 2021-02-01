@@ -1,4 +1,4 @@
-import { HyundaiService } from '.'
+import { HyundaiService } from './base'
 import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 
 export class Lock extends HyundaiService {

@@ -39,6 +39,11 @@
                     "type": "string",
                     "required": true
                 }
+            },
+            "maxRange": {
+                "type": "number",
+                "title": "Maximum Range (mi/km)",
+                "required": false
             }
         }
     }

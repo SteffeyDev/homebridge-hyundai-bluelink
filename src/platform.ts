@@ -12,12 +12,13 @@ import BlueLinky from 'bluelinky'
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings'
 import { VehicleAccessory } from './platformAccessory'
 
-interface HyundaiConfig extends PlatformConfig {
+export interface HyundaiConfig extends PlatformConfig {
     username?: string
     password?: string
     pin?: string
     region?: 'US' | 'CA' | 'EU'
     vehicles?: [string]
+    maxRange?: number
 }
 export class HyundaiPlatform implements DynamicPlatformPlugin {
     public readonly Service: typeof Service = this.api.hap.Service

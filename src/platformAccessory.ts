@@ -4,7 +4,7 @@ import { EventEmitter } from 'events'
 import { PlatformAccessory } from 'homebridge'
 
 import { HyundaiPlatform } from './platform'
-import { HyundaiService, Lock } from './services'
+import initServices from './services'
 export class VehicleAccessory extends EventEmitter {
     private interval = 10 * 1000
     public status?: VehicleStatus
@@ -16,8 +16,7 @@ export class VehicleAccessory extends EventEmitter {
     ) {
         super()
         this.setInformation()
-        const services = [new Lock(this)]
-        services.forEach((s) => s.initService())
+        initServices(this)
         setInterval(this.fetchStatus.bind(this), this.interval)
     }
 

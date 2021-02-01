@@ -2,7 +2,7 @@
     "private": false,
     "displayName": "Homebridge Hyundai BlueLink",
     "name": "homebridge-hyundai-bluelink",
-    "version": "0.0.7",
+    "version": "0.1.0",
     "description": "Integrates with remote functionality for Hyundai cars.",
     "license": "Apache-2.0",
     "repository": {
