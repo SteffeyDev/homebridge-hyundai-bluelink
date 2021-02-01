@@ -12,7 +12,9 @@ export abstract class HyundaiService {
         .Characteristic
     protected readonly log: Logger = this.platform.log
 
-    constructor(protected readonly va: VehicleAccessory) {}
+    constructor(protected readonly va: VehicleAccessory) {
+        this.va.on('update', this.setCurrentState.bind(this))
+    }
 
     protected get service(): Service {
         return (

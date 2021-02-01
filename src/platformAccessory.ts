@@ -1,12 +1,12 @@
 import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 import { Vehicle } from 'bluelinky/dist/vehicles/vehicle'
+import { EventEmitter } from 'events'
 import { PlatformAccessory } from 'homebridge'
 
 import { HyundaiPlatform } from './platform'
 import { HyundaiService, Lock } from './services'
-export class VehicleAccessory {
+export class VehicleAccessory extends EventEmitter {
     private interval = 10 * 1000
-    private services: [HyundaiService]
     public status?: VehicleStatus
 
     constructor(
@@ -14,20 +14,17 @@ export class VehicleAccessory {
         public readonly accessory: PlatformAccessory,
         public readonly vehicle: Vehicle
     ) {
+        super()
         this.setInformation()
-        this.services = [new Lock(this)]
-        this.services.forEach((s) => s.initService())
+        const services = [new Lock(this)]
+        services.forEach((s) => s.initService())
         setInterval(this.fetchStatus.bind(this), this.interval)
     }
 
     fetchStatus(): void {
         this.vehicle
             .status({ refresh: false, parsed: true })
-            .then((response) =>
-                this.services.forEach((s) =>
-                    s.setCurrentState(<VehicleStatus>response)
-                )
-            )
+            .then((response) => this.emit('update', <VehicleStatus>response))
     }
 
     setInformation(): void {

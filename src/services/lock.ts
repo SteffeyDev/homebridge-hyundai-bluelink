@@ -28,6 +28,16 @@ export class Lock extends HyundaiService {
                 }
             })
     }
+    setCurrentState(status: VehicleStatus): void {
+        if (status.chassis.locked !== this.isLocked) {
+            this.isLocked = status.chassis.locked
+            this.log.info(`Vehicle is ${this.isLocked ? 'Locked' : 'Unlocked'}`)
+            this.service?.updateCharacteristic(
+                this.Characteristic.LockCurrentState,
+                this.lockCurrentState
+            )
+        }
+    }
     get lockCurrentState(): number {
         const { LockCurrentState } = this.Characteristic
 
@@ -45,15 +55,5 @@ export class Lock extends HyundaiService {
         return this.shouldLock
             ? LockTargetState.SECURED
             : LockTargetState.UNSECURED
-    }
-    setCurrentState(status: VehicleStatus): void {
-        if (status.chassis.locked !== this.isLocked) {
-            this.isLocked = status.chassis.locked
-            this.log.info(`Vehicle is ${this.isLocked ? 'Locked' : 'Unlocked'}`)
-            this.service?.updateCharacteristic(
-                this.Characteristic.LockCurrentState,
-                this.lockCurrentState
-            )
-        }
     }
 }
