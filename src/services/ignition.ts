@@ -6,7 +6,6 @@ export class Ignition extends HyundaiService {
     private shouldTurnOn?: boolean
     name = 'Ignition'
     serviceType = 'Switch'
-    defaultIgniOnDuration = 10
 
     initService(): void {
         const { On } = this.Characteristic
@@ -19,9 +18,7 @@ export class Ignition extends HyundaiService {
                     if (this.shouldTurnOn && !this.isOn) {
                         this.log.info('Starting Vehicle')
                         this.vehicle
-                            .start({
-                                igniOnDuration: this.defaultIgniOnDuration,
-                            })
+                            .start(this.config.remoteStart)
                             .then(() => cb(null))
                     } else if (!this.shouldTurnOn && this.isOn) {
                         this.log.info('Stopping Vehicle')

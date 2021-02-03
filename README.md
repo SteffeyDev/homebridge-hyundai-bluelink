@@ -16,13 +16,25 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
 ```json
 "platforms": [
     {
-        "username": "your username / email",
-        "password": "your password",
-        "region": "US"| "CA" | "EU",
-        "pin": "your pin",
+        "credentials": {
+            "username": "your username / email",
+            "password": "your password",
+            "region": "US / CA / EU",
+            "pin": "your pin"
+        },
         "vehicles": [
-            "your VIN"
+            {
+                "vin": "your VIN",
+                "maxRange": 500
+            }
         ],
+        "remoteStart": {
+            "cool": false,
+            "heat": false,
+            "defrost": false,
+            "temperature": 72,
+            "igniOnDuration": 15
+        },
         "platform": "Hyundai"
     }
 ],
@@ -33,5 +45,5 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
 -   [x] Lock/Unlock
 -   [x] Battery/Gas Distance to Empty
 -   [x] Remote Start/Stop
--   [ ] Remote start options
+-   [x] Remote start options
 -   [ ] Siri Support

@@ -5,45 +5,90 @@
     "schema": {
         "type": "object",
         "properties": {
-            "username": {
-                "title": "Username",
-                "type": "string",
-                "required": true
-            },
-            "password": {
-                "title": "Password",
-                "type": "string",
-                "required": true
-            },
-            "region": {
-                "title": "Region",
-                "type": "string",
-                "required": true,
-                "placeholder": "US",
-                "oneOf": [
-                    { "title": "United States", "enum": ["US"] },
-                    { "title": "Canada", "enum": ["CA"] },
-                    { "title": "Europe", "enum": ["EU"] }
-                ]
-            },
-            "pin": {
-                "title": "Pin",
-                "type": "string",
-                "placeholder": "1234",
-                "required": true
+            "credentials": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "title": "Username",
+                        "type": "string",
+                        "required": true
+                    },
+                    "password": {
+                        "title": "Password",
+                        "type": "string",
+                        "required": true
+                    },
+                    "region": {
+                        "title": "Region",
+                        "type": "string",
+                        "required": true,
+                        "placeholder": "US",
+                        "oneOf": [
+                            { "title": "United States", "enum": ["US"] },
+                            { "title": "Canada", "enum": ["CA"] },
+                            { "title": "Europe", "enum": ["EU"] }
+                        ]
+                    },
+                    "pin": {
+                        "title": "Pin",
+                        "type": "string",
+                        "placeholder": "1234",
+                        "required": true
+                    }
+                }
             },
             "vehicles": {
                 "type": "array",
                 "items": {
-                    "title": "VIN Number",
-                    "type": "string",
-                    "required": true
+                    "type": "object",
+                    "properties": {
+                        "vin": {
+                            "title": "VIN Number",
+                            "type": "string",
+                            "required": true
+                        },
+                        "maxRange": {
+                            "type": "number",
+                            "title": "Maximum Range (mi/km)",
+                            "required": false
+                        }
+                    }
                 }
             },
-            "maxRange": {
-                "type": "number",
-                "title": "Maximum Range (mi/km)",
-                "required": false
+            "remoteStart": {
+                "type": "object",
+                "properties": {
+                    "cool": {
+                        "type": "boolean",
+                        "title": "Turn on A/C",
+                        "required": false,
+                        "default": false
+                    },
+                    "heat": {
+                        "type": "boolean",
+                        "title": "Turn on Heat",
+                        "required": false,
+                        "default": false
+                    },
+                    "defrost": {
+                        "type": "boolean",
+                        "title": "Defrost",
+                        "required": false,
+                        "default": false
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "title": "Desired temperature",
+                        "required": false,
+                        "placeholder": 72
+                    },
+                    "igniOnDuration": {
+                        "type": "number",
+                        "title": "How long (minutes)",
+                        "required": true,
+                        "default": 15
+                    }
+                }
             }
         }
     }

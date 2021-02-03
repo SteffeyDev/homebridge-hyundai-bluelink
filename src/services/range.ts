@@ -9,7 +9,9 @@ export class Range extends HyundaiService {
     lowBatteryThreshold = 25
 
     initService(): void {
-        this.maxRange = this.config.maxRange
+        this.maxRange = this.config.vehicles.find(
+            ({ vin }) => vin === this.accessory.context.device.vin
+        )?.maxRange
 
         const {
             BatteryLevel,

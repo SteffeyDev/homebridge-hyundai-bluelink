@@ -11,15 +11,8 @@ import BlueLinky from 'bluelinky'
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings'
 import { VehicleAccessory } from './platformAccessory'
+import { HyundaiConfig } from './config'
 
-export interface HyundaiConfig extends PlatformConfig {
-    username?: string
-    password?: string
-    pin?: string
-    region?: 'US' | 'CA' | 'EU'
-    vehicles?: [string]
-    maxRange?: number
-}
 export class HyundaiPlatform implements DynamicPlatformPlugin {
     public readonly Service: typeof Service = this.api.hap.Service
     public readonly Characteristic: typeof Characteristic = this.api.hap
@@ -30,7 +23,7 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
 
     constructor(
         public readonly log: Logger,
-        public readonly config: HyundaiConfig,
+        public readonly config: PlatformConfig,
         public readonly api: API
     ) {
         // When this event is fired it means Homebridge has restored all cached accessories from disk.
@@ -63,15 +56,10 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
     discoverDevices(): void {
         this.log.debug('Hyundai config:', this.config)
 
-        const client = new BlueLinky({
-            username: this.config.username,
-            password: this.config.password,
-            region: this.config.region,
-            pin: this.config.pin,
-        })
+        const client = new BlueLinky((<HyundaiConfig>this.config).credentials)
         this.log.debug('Client:', client)
         client.on('ready', async () => {
-            for (const vin of this.config.vehicles || []) {
+            for (const { vin } of (<HyundaiConfig>this.config).vehicles) {
                 const uuid = this.api.hap.uuid.generate(vin)
                 const existingAccessory = this.accessories.find(
                     (accessory) => accessory.UUID === uuid
@@ -139,8 +127,8 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
                 }
             }
         })
-        const uuids = this.config.vehicles?.map((v) =>
-            this.api.hap.uuid.generate(v)
+        const uuids = (<HyundaiConfig>this.config).vehicles?.map(({ vin }) =>
+            this.api.hap.uuid.generate(vin)
         )
         for (const accessory of this.accessories) {
             if (!uuids?.includes(accessory.UUID)) {
