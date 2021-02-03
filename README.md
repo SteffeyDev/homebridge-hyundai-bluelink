@@ -33,4 +33,5 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
 -   [x] Lock/Unlock
 -   [x] Battery/Gas Distance to Empty
 -   [x] Remote Start/Stop
+-   [ ] Remote start options
 -   [ ] Siri Support
