@@ -1,12 +1,6 @@
 import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 import { Vehicle } from 'bluelinky/dist/vehicles/vehicle'
-import {
-    Characteristic,
-    Logger,
-    PlatformAccessory,
-    PlatformConfig,
-    Service,
-} from 'homebridge'
+import { Characteristic, Logger, PlatformAccessory, Service } from 'homebridge'
 import { HyundaiConfig } from '../config'
 import { HyundaiPlatform } from '../platform'
 import { VehicleAccessory } from '../platformAccessory'
