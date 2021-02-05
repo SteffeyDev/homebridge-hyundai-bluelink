@@ -59,7 +59,8 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
         const client = new BlueLinky((<HyundaiConfig>this.config).credentials)
         this.log.debug('Client:', client)
         client.on('ready', async () => {
-            for (const { vin } of (<HyundaiConfig>this.config).vehicles) {
+            for (const { vin, maxRange } of (<HyundaiConfig>this.config)
+                .vehicles) {
                 const uuid = this.api.hap.uuid.generate(vin)
                 const existingAccessory = this.accessories.find(
                     (accessory) => accessory.UUID === uuid
@@ -113,6 +114,7 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
                     // store a copy of the device object in the `accessory.context`
                     // the `context` property can be used to store any data about the accessory you may need
                     accessory.context.device = vehicle.vehicleConfig
+                    accessory.context.device.maxRange = maxRange
 
                     // create the accessory handler for the newly create accessory
                     // this is imported from `platformAccessory.ts`
