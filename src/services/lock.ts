@@ -18,13 +18,15 @@ export class Lock extends HyundaiService {
             ?.getCharacteristic(LockTargetState)
             .on('get', (cb) => cb(null, this.lockTargetState))
             .on('set', (_value, cb) => {
-                this.shouldLock = !this.isLocked
-                if (this.shouldLock) {
-                    this.log.info('Locking Vehicle')
-                    this.vehicle.lock().then(() => cb(null))
-                } else {
-                    this.log.info('Unlocking Vehicle')
-                    this.vehicle.unlock().then(() => cb(null))
+                if (this.shouldLock === this.isLocked) {
+                    this.shouldLock = !this.isLocked
+                    if (this.shouldLock) {
+                        this.log.info('Locking Vehicle')
+                        this.vehicle.lock().then(() => cb(null))
+                    } else {
+                        this.log.info('Unlocking Vehicle')
+                        this.vehicle.unlock().then(() => cb(null))
+                    }
                 }
             })
     }
