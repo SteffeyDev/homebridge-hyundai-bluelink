@@ -89,6 +89,12 @@
                         "default": 15
                     }
                 }
+            },
+            "refreshInterval": {
+                "type": "number",
+                "title": "How often to check for new status (seconds)",
+                "required": false,
+                "default": 20
             }
         }
     }

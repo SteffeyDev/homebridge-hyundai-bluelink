@@ -2,11 +2,11 @@ import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 import { Vehicle } from 'bluelinky/dist/vehicles/vehicle'
 import { EventEmitter } from 'events'
 import { PlatformAccessory } from 'homebridge'
+import { HyundaiConfig } from './config'
 
 import { HyundaiPlatform } from './platform'
 import initServices from './services'
 export class VehicleAccessory extends EventEmitter {
-    private interval = 10 * 1000
     public status?: VehicleStatus
 
     constructor(
@@ -17,7 +17,10 @@ export class VehicleAccessory extends EventEmitter {
         super()
         this.setInformation()
         initServices(this)
-        setInterval(this.fetchStatus.bind(this), this.interval)
+        setInterval(
+            this.fetchStatus.bind(this),
+            (<HyundaiConfig>platform.config).interval * 1000
+        )
     }
 
     fetchStatus(): void {
