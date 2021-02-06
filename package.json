@@ -44,5 +44,16 @@
         "typescript": "^4.1.3"
     },
     "homepage": "https://github.com/athal7/homebridge-hyundai-bluelink#readme",
-    "author": "Andrew Thal"
+    "author": "Andrew Thal",
+    "funding": [
+      {
+        "type" : "github",
+        "url" : "https://github.com/sponsors/athal7"
+      },
+      {
+        "type" : "buymeacoffee",
+        "url" : "https://buymeacoff.ee/athal7"
+      }
+    ]
+
 }
