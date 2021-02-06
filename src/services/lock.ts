@@ -25,23 +25,25 @@ export class Lock extends HyundaiService {
                         this.vehicle
                             .lock()
                             .then(() => cb(null))
-                            .catch((reason) => 
+                            .catch((reason) => {
                                 this.log.error(
                                     'Lock Fail', 
                                     reason
                                 )
-                            )
+                                cb(null)
+                            })
                     } else {
                         this.log.info('Unlocking Vehicle')
                         this.vehicle
                             .unlock()
                             .then(() => cb(null))
-                            .catch((reason) => 
+                            .catch((reason) => {
                                 this.log.error(
                                     'Unlock Fail', 
                                     reason
                                 )
-                            )
+                                cb(null)
+                            })
                     }
                 }
             })
