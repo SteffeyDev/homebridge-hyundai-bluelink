@@ -7,6 +7,7 @@ import { HyundaiConfig } from './config'
 import { HyundaiPlatform } from './platform'
 import initServices from './services'
 export class VehicleAccessory extends EventEmitter {
+    private interval: number
     public status?: VehicleStatus
 
     constructor(
@@ -17,16 +18,27 @@ export class VehicleAccessory extends EventEmitter {
         super()
         this.setInformation()
         initServices(this)
-        setInterval(
-            this.fetchStatus.bind(this),
-            (<HyundaiConfig>platform.config).interval * 1000
-        )
+        this.interval = this.intervalFromConfig()
+        this.fetchStatus()
+    }
+    intervalFromConfig(): number {
+        return (<HyundaiConfig>this.platform.config).refreshInterval * 1000
     }
 
     fetchStatus(): void {
         this.vehicle
             .status({ refresh: false, parsed: true })
-            .then((response) => this.emit('update', <VehicleStatus>response))
+            .then((response) => {
+                this.emit('update', <VehicleStatus>response)
+                this.interval = this.intervalFromConfig()
+            })
+            .catch((error) => {
+                this.platform.log.error('Status fetch error', error)
+                this.interval = this.interval * 2
+            })
+            .finally(() =>
+                setInterval(this.fetchStatus.bind(this), this.interval)
+            )
     }
 
     setInformation(): void {

@@ -17,7 +17,8 @@ export class Lock extends HyundaiService {
         this.service
             ?.getCharacteristic(LockTargetState)
             .on('get', (cb) => cb(null, this.lockTargetState))
-            .on('set', (_value, cb) => {
+            .on('set', (value, cb) => {
+                this.log.debug('Lock Value', value)
                 if (this.shouldLock === this.isLocked) {
                     this.shouldLock = !this.isLocked
                     if (this.shouldLock) {
@@ -26,10 +27,7 @@ export class Lock extends HyundaiService {
                             .lock()
                             .then(() => cb(null))
                             .catch((reason) => {
-                                this.log.error(
-                                    'Lock Fail', 
-                                    reason
-                                )
+                                this.log.error('Lock Fail', reason)
                                 cb(null)
                             })
                     } else {
@@ -38,10 +36,7 @@ export class Lock extends HyundaiService {
                             .unlock()
                             .then(() => cb(null))
                             .catch((reason) => {
-                                this.log.error(
-                                    'Unlock Fail', 
-                                    reason
-                                )
+                                this.log.error('Unlock Fail', reason)
                                 cb(null)
                             })
                     }

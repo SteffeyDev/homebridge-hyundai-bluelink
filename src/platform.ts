@@ -63,10 +63,9 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
         this.log.debug('Hyundai config:', this.config)
 
         const client = new BlueLinky(this.config.credentials)
-        this.log.debug('Client:', client)
         client.on('ready', async () => {
-            for (const { vin, maxRange } of (<HyundaiConfig>this.config)
-                .vehicles) {
+            this.log.debug('Client Ready')
+            for (const { vin, maxRange } of this.config.vehicles) {
                 const uuid = this.api.hap.uuid.generate(vin)
                 const existingAccessory = this.accessories.find(
                     (accessory) => accessory.UUID === uuid
@@ -135,6 +134,10 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
                 }
             }
         })
+        client.on('error', async (err) => {
+            this.log.error('Client Error', err)
+        })
+
         const uuids = (<HyundaiConfig>this.config).vehicles?.map(({ vin }) =>
             this.api.hap.uuid.generate(vin)
         )
