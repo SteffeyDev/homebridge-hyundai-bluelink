@@ -30,17 +30,11 @@ export class VehicleAccessory extends EventEmitter {
             .status({ refresh: false, parsed: true })
             .then((response) => {
                 this.emit('update', <VehicleStatus>response)
-                this.interval = this.intervalFromConfig()
+                setInterval(this.fetchStatus.bind(this), this.interval)
             })
             .catch((error) => {
                 this.platform.log.error('Status fetch error', error)
-                if (this.interval < 1000000000) {
-                    this.interval = this.interval * 2
-            }
             })
-            .finally(() =>
-                setInterval(this.fetchStatus.bind(this), this.interval)
-            )
     }
 
     setInformation(): void {
