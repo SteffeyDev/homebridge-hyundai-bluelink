@@ -21,10 +21,7 @@ export class Ignition extends HyundaiService {
                             .start(this.config.remoteStart)
                             .then(() => cb(null))
                             .catch((reason) => {
-                                this.log.error(
-                                    'Start Fail', 
-                                    reason
-                                )
+                                this.log.error('Start Fail', reason)
                                 cb(null)
                             })
                     } else if (!this.shouldTurnOn && this.isOn) {
@@ -33,10 +30,7 @@ export class Ignition extends HyundaiService {
                             .stop()
                             .then(() => cb(null))
                             .catch((reason) => {
-                                this.log.error(
-                                    'Stop Fail', 
-                                    reason
-                                )
+                                this.log.error('Stop Fail', reason)
                                 cb(null)
                             })
                     }
