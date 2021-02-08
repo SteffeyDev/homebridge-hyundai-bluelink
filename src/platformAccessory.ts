@@ -7,9 +7,7 @@ import { HyundaiConfig } from './config'
 import { HyundaiPlatform } from './platform'
 import initServices from './services'
 export class VehicleAccessory extends EventEmitter {
-    private interval: number
-    public status?: VehicleStatus
-
+    private isFetching = false
     constructor(
         public readonly platform: HyundaiPlatform,
         public readonly accessory: PlatformAccessory,
@@ -18,24 +16,26 @@ export class VehicleAccessory extends EventEmitter {
         super()
         this.setInformation()
         initServices(this)
-        this.interval = this.intervalFromConfig()
-        this.fetchStatus()
-    }
-    intervalFromConfig(): number {
-        return (<HyundaiConfig>this.platform.config).refreshInterval * 1000
+        setInterval(
+            this.fetchStatus.bind(this),
+            (<HyundaiConfig>this.platform.config).refreshInterval * 1000
+        )
     }
 
     fetchStatus(): void {
-        this.vehicle
-            .status({ refresh: false, parsed: true })
-            .then((response) => {
-                this.platform.log.debug('Received status update', response)
-                this.emit('update', <VehicleStatus>response)
-                setInterval(this.fetchStatus.bind(this), this.interval)
-            })
-            .catch((error) => {
-                this.platform.log.error('Status fetch error', error)
-            })
+        if (!this.isFetching) {
+            this.isFetching = true
+            this.vehicle
+                .status({ refresh: false, parsed: true })
+                .then((response) => {
+                    this.platform.log.debug('Received status update', response)
+                    this.emit('update', <VehicleStatus>response)
+                    this.isFetching = false
+                })
+                .catch((error) => {
+                    this.platform.log.error('Status fetch error', error)
+                })
+        }
     }
 
     setInformation(): void {

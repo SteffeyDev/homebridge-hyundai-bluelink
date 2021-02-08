@@ -17,7 +17,7 @@ export class Lock extends HyundaiService {
         this.service
             ?.getCharacteristic(LockTargetState)
             .on('get', (cb) => cb(null, this.lockTargetState))
-            .on('set', (value, cb) => {
+            .on('set', (_value, cb) => {
                 if ([undefined, this.isLocked].includes(this.shouldLock)) {
                     this.shouldLock = !this.isLocked
                     this.shouldLock ? this.lock(cb) : this.unlock(cb)
