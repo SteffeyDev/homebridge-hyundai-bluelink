@@ -34,7 +34,9 @@ export class VehicleAccessory extends EventEmitter {
             })
             .catch((error) => {
                 this.platform.log.error('Status fetch error', error)
-                this.interval = this.interval * 2
+                if (this.interval < 1000000000) {
+                    this.interval = this.interval * 2
+            }
             })
             .finally(() =>
                 setInterval(this.fetchStatus.bind(this), this.interval)
