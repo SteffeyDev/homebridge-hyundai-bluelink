@@ -29,6 +29,7 @@ export class VehicleAccessory extends EventEmitter {
         this.vehicle
             .status({ refresh: false, parsed: true })
             .then((response) => {
+                this.platform.log.debug('Received status update', response)
                 this.emit('update', <VehicleStatus>response)
                 setInterval(this.fetchStatus.bind(this), this.interval)
             })

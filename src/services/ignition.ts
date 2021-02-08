@@ -16,27 +16,33 @@ export class Ignition extends HyundaiService {
                 if (this.shouldTurnOn !== value) {
                     this.shouldTurnOn = value
                     if (this.shouldTurnOn && !this.isOn) {
-                        this.log.info('Starting Vehicle')
-                        this.vehicle
-                            .start(this.config.remoteStart)
-                            .then(() => cb(null))
-                            .catch((reason) => {
-                                this.log.error('Start Fail', reason)
-                                cb(null)
-                            })
+                        this.start(cb)
                     } else if (!this.shouldTurnOn && this.isOn) {
-                        this.log.info('Stopping Vehicle')
-                        this.vehicle
-                            .stop()
-                            .then(() => cb(null))
-                            .catch((reason) => {
-                                this.log.error('Stop Fail', reason)
-                                cb(null)
-                            })
+                        this.stop(cb)
+                    } else {
+                        this.log.debug('isOn', this.isOn)
+                        this.log.debug('shouldTurnOn', this.shouldTurnOn)
                     }
                 }
             })
     }
+    start(cb): void {
+        this.log.info('Starting Vehicle')
+        this.vehicle
+            .start(this.config.remoteStart)
+            .then((response) => this.log.info('Start Response', response))
+            .catch((reason) => this.log.error('Start Fail', reason))
+            .finally(() => cb(null))
+    }
+    stop(cb): void {
+        this.log.info('Stopping Vehicle')
+        this.vehicle
+            .stop()
+            .then((response) => this.log.info('Stop Response', response))
+            .catch((reason) => this.log.error('Stop Fail', reason))
+            .finally(() => cb(null))
+    }
+
     setCurrentState(status: VehicleStatus): void {
         if (status.engine.ignition !== this.isOn) {
             this.isOn = status.engine.ignition

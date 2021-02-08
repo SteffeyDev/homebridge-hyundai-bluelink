@@ -18,28 +18,12 @@ export class Lock extends HyundaiService {
             ?.getCharacteristic(LockTargetState)
             .on('get', (cb) => cb(null, this.lockTargetState))
             .on('set', (value, cb) => {
-                this.log.debug('Lock Value', value)
-                if (this.shouldLock === this.isLocked) {
+                if ([undefined, this.isLocked].includes(this.shouldLock)) {
                     this.shouldLock = !this.isLocked
-                    if (this.shouldLock) {
-                        this.log.info('Locking Vehicle')
-                        this.vehicle
-                            .lock()
-                            .then(() => cb(null))
-                            .catch((reason) => {
-                                this.log.error('Lock Fail', reason)
-                                cb(null)
-                            })
-                    } else {
-                        this.log.info('Unlocking Vehicle')
-                        this.vehicle
-                            .unlock()
-                            .then(() => cb(null))
-                            .catch((reason) => {
-                                this.log.error('Unlock Fail', reason)
-                                cb(null)
-                            })
-                    }
+                    this.shouldLock ? this.lock(cb) : this.unlock(cb)
+                } else {
+                    this.log.debug('isLocked', this.isLocked)
+                    this.log.debug('shouldLock', this.shouldLock)
                 }
             })
     }
@@ -52,6 +36,22 @@ export class Lock extends HyundaiService {
                 this.lockCurrentState
             )
         }
+    }
+    lock(cb): void {
+        this.log.info('Locking Vehicle')
+        this.vehicle
+            .lock()
+            .then((response) => this.log.info('Lock Response', response))
+            .catch((reason) => this.log.error('Lock Fail', reason))
+            .finally(() => cb(null))
+    }
+    unlock(cb): void {
+        this.log.info('Unlocking Vehicle')
+        this.vehicle
+            .unlock()
+            .then((response) => this.log.info('Unlock Response', response))
+            .catch((reason) => this.log.error('Unlock Fail', reason))
+            .finally(() => cb(null))
     }
     get lockCurrentState(): number {
         const { LockCurrentState } = this.Characteristic
