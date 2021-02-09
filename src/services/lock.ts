@@ -2,7 +2,7 @@ import { HyundaiService } from './base'
 import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 
 export class Lock extends HyundaiService {
-    private shouldLock?: boolean
+    private _shouldLock?: boolean
     private isLocked?: boolean
     name = 'Doors'
     serviceType = 'LockMechanism'
@@ -70,5 +70,15 @@ export class Lock extends HyundaiService {
         return this.shouldLock
             ? LockTargetState.SECURED
             : LockTargetState.UNSECURED
+    }
+    get shouldLock(): boolean {
+        return this._shouldLock === undefined
+            ? !!this.isLocked
+            : this._shouldLock
+    }
+    set shouldLock(value: boolean) {
+        this._shouldLock = value
+        // Give up after 5 minutes
+        setInterval(() => (this._shouldLock = undefined), 5000)
     }
 }

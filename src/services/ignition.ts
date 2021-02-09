@@ -3,7 +3,7 @@ import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 
 export class Ignition extends HyundaiService {
     private isOn?: boolean
-    private shouldTurnOn?: boolean
+    private _shouldTurnOn?: boolean
     name = 'Ignition'
     serviceType = 'Switch'
 
@@ -53,5 +53,15 @@ export class Ignition extends HyundaiService {
                 this.isOn
             )
         }
+    }
+    get shouldTurnOn(): boolean {
+        return this._shouldTurnOn === undefined
+            ? !!this.isOn
+            : this._shouldTurnOn
+    }
+    set shouldTurnOn(value: boolean) {
+        this._shouldTurnOn = value
+        // Give up after 5 minutes
+        setInterval(() => (this._shouldTurnOn = undefined), 5000)
     }
 }
