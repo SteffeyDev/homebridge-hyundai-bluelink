@@ -62,6 +62,6 @@ export class Ignition extends HyundaiService {
     set shouldTurnOn(value: boolean) {
         this._shouldTurnOn = value
         // Give up after 5 minutes
-        setInterval(() => (this._shouldTurnOn = undefined), 5000)
+        setInterval(() => (this._shouldTurnOn = undefined), 1000 * 5 * 60)
     }
 }

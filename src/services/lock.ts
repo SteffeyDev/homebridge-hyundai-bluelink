@@ -79,6 +79,6 @@ export class Lock extends HyundaiService {
     set shouldLock(value: boolean) {
         this._shouldLock = value
         // Give up after 5 minutes
-        setInterval(() => (this._shouldLock = undefined), 5000)
+        setInterval(() => (this._shouldLock = undefined), 1000 * 5 * 60)
     }
 }
