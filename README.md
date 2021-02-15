@@ -41,6 +41,18 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
 ],
 ```
 
+## Known Issues
+
+**SSL Key too Small**
+
+Log:
+
+```
+[Hyundai] Client Error GotError [RequestError]: write EPROTO 1995553232:error:141A318A:SSL routines:tls_process_ske_dhe:dh key too small:../deps/openssl/openssl/ssl/statem/statem_clnt.c:2158:
+```
+
+Workaround: https://github.com/FreshRSS/FreshRSS/issues/3029
+
 ## Roadmap
 
 -   [x] Lock/Unlock
