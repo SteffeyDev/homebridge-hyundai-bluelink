@@ -11,7 +11,7 @@ export class Ignition extends HyundaiService {
         const { On } = this.Characteristic
         this.service
             ?.getCharacteristic(On)
-            .on('get', (cb) => cb(null, this.isOn))
+            .on('get', (cb) => cb(null, this.isOn ?? false))
             .on('set', (value, cb) => {
                 if (this.shouldTurnOn !== value) {
                     this.shouldTurnOn = value
