@@ -12,17 +12,13 @@ export class Ignition extends HyundaiService {
         this.service
             ?.getCharacteristic(On)
             .on('get', (cb) => cb(null, this.isOn ?? false))
-            .on('set', (value, cb) => {
-                if (this.shouldTurnOn !== value) {
-                    this.shouldTurnOn = value
-                    if (this.shouldTurnOn && !this.isOn) {
-                        this.start(cb)
-                    } else if (!this.shouldTurnOn && this.isOn) {
-                        this.stop(cb)
-                    } else {
-                        this.log.debug('isOn', this.isOn)
-                        this.log.debug('shouldTurnOn', this.shouldTurnOn)
-                    }
+            .on('set', (_value, cb) => {
+                if (this.shouldTurnOn === undefined) {
+                    this.shouldTurnOn = !this.isOn
+                    this.shouldTurnOn ? this.start(cb) : this.stop(cb)
+                } else {
+                    this.log.debug('isOn', this.isOn)
+                    this.log.debug('shouldTurnOn', this.shouldTurnOn)
                 }
             })
     }
