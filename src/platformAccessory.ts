@@ -18,6 +18,7 @@ export class VehicleAccessory extends EventEmitter {
         super()
         this.setInformation()
         initServices(this)
+        this.fetchStatus()
         setInterval(this.fetchStatus.bind(this), REFRESH_INTERVAL)
     }
 
