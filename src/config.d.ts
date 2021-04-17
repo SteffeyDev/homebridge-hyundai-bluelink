@@ -24,5 +24,4 @@ export interface HyundaiConfig extends PlatformConfig {
     credentials: AuthConfig
     vehicles: VehicleConfig[]
     remoteStart: StartConfig
-    refreshInterval: number
 }
