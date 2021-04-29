@@ -13,16 +13,16 @@ export class Ignition extends HyundaiService {
             ?.getCharacteristic(On)
             .on('get', (cb) => cb(null, this.isOn ?? false))
             .on('set', (value, cb) => {
-                if (this.shouldTurnOn !== value) {
-                    this.shouldTurnOn = value
-                    if (this.shouldTurnOn && !this.isOn) {
+                if (this.shouldTurnOn === undefined) {
+                    this.shouldTurnOn = !this.isOn
+                    if (this.shouldTurnOn) {
                         this.start(cb)
-                    } else if (!this.shouldTurnOn && this.isOn) {
-                        this.stop(cb)
                     } else {
-                        this.log.debug('isOn', this.isOn)
-                        this.log.debug('shouldTurnOn', this.shouldTurnOn)
+                        this.stop(cb)
                     }
+                } else {
+                    this.log.debug('isOn', this.isOn)
+                    this.log.debug('shouldTurnOn', this.shouldTurnOn)
                 }
             })
     }
@@ -46,7 +46,7 @@ export class Ignition extends HyundaiService {
     setCurrentState(status: VehicleStatus): void {
         if (status.engine.ignition !== this.isOn) {
             this.isOn = status.engine.ignition
-            this.shouldTurnOn = this.isOn
+
             this.log.info(`Vehicle is ${this.isOn ? 'On' : 'Off'}`)
             this.service?.updateCharacteristic(
                 this.Characteristic.On,
@@ -54,10 +54,8 @@ export class Ignition extends HyundaiService {
             )
         }
     }
-    get shouldTurnOn(): boolean {
-        return this._shouldTurnOn === undefined
-            ? !!this.isOn
-            : this._shouldTurnOn
+    get shouldTurnOn(): boolean | undefined {
+        return this._shouldTurnOn
     }
     set shouldTurnOn(value: boolean) {
         this._shouldTurnOn = value
