@@ -42,7 +42,7 @@ export class Ignition extends HyundaiService {
     setCurrentState(status: VehicleStatus): void {
         if (status.engine.ignition !== this.isOn) {
             this.isOn = status.engine.ignition
-            this.shouldTurnOn = this.isOn
+
             this.log.info(`Vehicle is ${this.isOn ? 'On' : 'Off'}`)
             this.service?.updateCharacteristic(
                 this.Characteristic.On,
@@ -50,12 +50,10 @@ export class Ignition extends HyundaiService {
             )
         }
     }
-    get shouldTurnOn(): boolean {
-        return this._shouldTurnOn === undefined
-            ? !!this.isOn
-            : this._shouldTurnOn
+    get shouldTurnOn(): boolean | undefined {
+        return this._shouldTurnOn
     }
-    set shouldTurnOn(value: boolean) {
+    set shouldTurnOn(value: boolean | undefined) {
         this._shouldTurnOn = value
         // Check on status & reset after 1 minute
         setTimeout(() => {
