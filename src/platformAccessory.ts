@@ -2,10 +2,12 @@ import { VehicleStatus } from 'bluelinky/dist/interfaces/common.interfaces'
 import { Vehicle } from 'bluelinky/dist/vehicles/vehicle'
 import { EventEmitter } from 'events'
 import { PlatformAccessory } from 'homebridge'
-import { HyundaiConfig } from './config'
 
 import { HyundaiPlatform } from './platform'
 import initServices from './services'
+
+const REFRESH_INTERVAL = 1000 * 60 * 60 // once per hour, per https://github.com/Hacksore/bluelinky/wiki/API-Rate-Limits
+
 export class VehicleAccessory extends EventEmitter {
     private isFetching = false
     constructor(
@@ -16,10 +18,8 @@ export class VehicleAccessory extends EventEmitter {
         super()
         this.setInformation()
         initServices(this)
-        setInterval(
-            this.fetchStatus.bind(this),
-            (<HyundaiConfig>this.platform.config).refreshInterval * 1000
-        )
+        this.fetchStatus()
+        setInterval(this.fetchStatus.bind(this), REFRESH_INTERVAL)
     }
 
     fetchStatus(): void {

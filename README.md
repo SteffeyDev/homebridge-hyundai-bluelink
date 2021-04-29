@@ -21,6 +21,7 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
             "username": "your username / email",
             "password": "your password",
             "region": "US / CA / EU",
+            "brand": "Hyundai / Kia",
             "pin": "your pin"
         },
         "vehicles": [

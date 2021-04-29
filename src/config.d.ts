@@ -1,10 +1,13 @@
+import { REGION } from 'bluelinky/dist/constants'
+import { Brand } from 'bluelinky/dist/interfaces/common.interfaces'
 import { PlatformConfig } from 'homebridge'
 
 interface AuthConfig {
     username: string
     password: string
     pin: string
-    region: 'US' | 'CA' | 'EU'
+    region: REGION
+    brand: Brand
 }
 interface VehicleConfig {
     vin: string
@@ -21,5 +24,4 @@ export interface HyundaiConfig extends PlatformConfig {
     credentials: AuthConfig
     vehicles: VehicleConfig[]
     remoteStart: StartConfig
-    refreshInterval: number
 }
