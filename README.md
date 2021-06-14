@@ -54,10 +54,6 @@ Log:
 
 Workaround: https://github.com/FreshRSS/FreshRSS/issues/3029
 
-## Roadmap
+**Status Refresh Delay**
 
--   [x] Lock/Unlock
--   [x] Battery/Gas Distance to Empty
--   [x] Remote Start/Stop
--   [x] Remote start options
--   [ ] Siri Support
+Due to Hyundai's [API Rate Limits](https://github.com/Hacksore/bluelinky/wiki/API-Rate-Limits), the car status (locked, on/off, range) is only updated once per hour. Actions taken from homebridge get automatically refreshed, but actions taken elsewhere (e.g. bluelink app, key fab) may not display in homebridge for up to an hour.
