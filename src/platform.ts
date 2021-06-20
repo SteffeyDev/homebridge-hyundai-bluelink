@@ -84,6 +84,8 @@ export class HyundaiPlatform implements DynamicPlatformPlugin {
                         // if you need to update the accessory.context then you should run `api.updatePlatformAccessories`. eg.:
                         // existingAccessory.context.device = device;
                         // this.api.updatePlatformAccessories([existingAccessory]);
+                        existingAccessory.context.device = vehicle.vehicleConfig
+                        existingAccessory.context.device.maxRange = maxRange
                         // create the accessory handler for the restored accessory
                         // this is imported from `platformAccessory.ts`
                         new VehicleAccessory(this, existingAccessory, vehicle)
