@@ -1,65 +1,65 @@
 {
-    "private": false,
-    "displayName": "Homebridge Hyundai BlueLink",
-    "name": "homebridge-hyundai-bluelink",
-    "version": "1.3.6",
-    "description": "Integrates with remote functionality for Hyundai cars.",
-    "license": "Apache-2.0",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/athal7/homebridge-hyundai-bluelink.git"
+  "private": false,
+  "displayName": "Homebridge Hyundai BlueLink",
+  "name": "homebridge-hyundai-bluelink",
+  "version": "1.3.6",
+  "description": "Integrates with remote functionality for Hyundai cars.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/athal7/homebridge-hyundai-bluelink.git"
+  },
+  "bugs": {
+    "url": "https://github.com/athal7/homebridge-hyundai-bluelink/issues"
+  },
+  "engines": {
+    "node": ">=10.17.0",
+    "homebridge": ">=1.0.0"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint src/**.ts --max-warnings=0",
+    "watch": "npm run build && npm link && nodemon 2>&1 | tee /tmp/homebridge.log",
+    "build": "rimraf ./dist && tsc",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "dependencies": {
+    "bluelinky": "^7.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.43",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "homebridge": "^1.3.4",
+    "husky": "^4.3.8",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "homepage": "https://github.com/athal7/homebridge-hyundai-bluelink#readme",
+  "author": "Andrew Thal",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/athal7"
     },
-    "bugs": {
-        "url": "https://github.com/athal7/homebridge-hyundai-bluelink/issues"
-    },
-    "engines": {
-        "node": ">=10.17.0",
-        "homebridge": ">=1.0.0"
-    },
-    "main": "dist/index.js",
-    "scripts": {
-        "lint": "eslint src/**.ts --max-warnings=0",
-        "watch": "npm run build && npm link && nodemon 2>&1 | tee /tmp/homebridge.log",
-        "build": "rimraf ./dist && tsc",
-        "prepublishOnly": "npm run lint && npm run build"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
-    "keywords": [
-        "homebridge-plugin"
-    ],
-    "dependencies": {
-        "bluelinky": "^7.3.0"
-    },
-    "devDependencies": {
-        "@types/node": "^14.14.43",
-        "@typescript-eslint/eslint-plugin": "^4.22.0",
-        "@typescript-eslint/parser": "^4.22.0",
-        "eslint": "^7.25.0",
-        "eslint-config-prettier": "^7.2.0",
-        "eslint-plugin-prettier": "^3.4.0",
-        "homebridge": "^1.3.4",
-        "husky": "^4.3.8",
-        "nodemon": "^2.0.7",
-        "prettier": "^2.2.1",
-        "pretty-quick": "^3.1.0",
-        "rimraf": "^3.0.2",
-        "ts-node": "^9.1.1",
-        "typescript": "^4.2.4"
-    },
-    "homepage": "https://github.com/athal7/homebridge-hyundai-bluelink#readme",
-    "author": "Andrew Thal",
-    "funding": [
-        {
-            "type": "github",
-            "url": "https://github.com/sponsors/athal7"
-        },
-        {
-            "type": "buymeacoffee",
-            "url": "https://buymeacoff.ee/athal7"
-        }
-    ]
+    {
+      "type": "buymeacoffee",
+      "url": "https://buymeacoff.ee/athal7"
+    }
+  ]
 }
