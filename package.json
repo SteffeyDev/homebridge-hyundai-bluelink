@@ -32,7 +32,7 @@
     "homebridge-plugin"
   ],
   "dependencies": {
-    "bluelinky": "^7.4.1"
+    "bluelinky": "^7.5.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.43",
