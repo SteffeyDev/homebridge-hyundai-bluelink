@@ -1,105 +1,105 @@
 {
-    "pluginAlias": "Hyundai",
-    "pluginType": "platform",
-    "singular": true,
-    "schema": {
+  "pluginAlias": "Hyundai",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "credentials": {
         "type": "object",
         "properties": {
-            "credentials": {
-                "type": "object",
-                "properties": {
-                    "username": {
-                        "title": "Username",
-                        "type": "string",
-                        "required": true
-                    },
-                    "password": {
-                        "title": "Password",
-                        "type": "string",
-                        "required": true
-                    },
-                    "region": {
-                        "title": "Region",
-                        "type": "string",
-                        "required": true,
-                        "placeholder": "US",
-                        "oneOf": [
-                            { "title": "United States", "enum": ["US"] },
-                            { "title": "Canada", "enum": ["CA"] },
-                            { "title": "Europe", "enum": ["EU"] }
-                        ]
-                    },
-                    "brand": {
-                        "title": "Brand",
-                        "type": "string",
-                        "required": true,
-                        "default": "hyundai",
-                        "oneOf": [
-                            { "title": "Hyundai", "enum": ["hyundai"] },
-                            { "title": "Kia", "enum": ["kia"] }
-                        ]
-                    },
-                    "pin": {
-                        "title": "Pin",
-                        "type": "string",
-                        "placeholder": "1234",
-                        "required": true
-                    }
-                }
-            },
-            "vehicles": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "vin": {
-                            "title": "VIN Number",
-                            "type": "string",
-                            "required": true
-                        },
-                        "maxRange": {
-                            "type": "number",
-                            "title": "Maximum Range (mi/km)",
-                            "required": false
-                        }
-                    }
-                }
-            },
-            "remoteStart": {
-                "type": "object",
-                "properties": {
-                    "cool": {
-                        "type": "boolean",
-                        "title": "Turn on A/C",
-                        "required": false,
-                        "default": false
-                    },
-                    "heat": {
-                        "type": "boolean",
-                        "title": "Turn on Heat",
-                        "required": false,
-                        "default": false
-                    },
-                    "defrost": {
-                        "type": "boolean",
-                        "title": "Defrost",
-                        "required": false,
-                        "default": false
-                    },
-                    "temperature": {
-                        "type": "number",
-                        "title": "Desired temperature",
-                        "required": false,
-                        "placeholder": 72
-                    },
-                    "igniOnDuration": {
-                        "type": "number",
-                        "title": "How long (minutes)",
-                        "required": true,
-                        "default": 15
-                    }
-                }
-            }
+          "username": {
+            "title": "Username",
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "title": "Password",
+            "type": "string",
+            "required": true
+          },
+          "region": {
+            "title": "Region",
+            "type": "string",
+            "required": true,
+            "placeholder": "US",
+            "oneOf": [
+              { "title": "United States", "enum": ["US"] },
+              { "title": "Canada", "enum": ["CA"] },
+              { "title": "Europe", "enum": ["EU"] }
+            ]
+          },
+          "brand": {
+            "title": "Brand",
+            "type": "string",
+            "required": true,
+            "default": "hyundai",
+            "oneOf": [
+              { "title": "Hyundai", "enum": ["hyundai"] },
+              { "title": "Kia", "enum": ["kia"] }
+            ]
+          },
+          "pin": {
+            "title": "Pin",
+            "type": "string",
+            "placeholder": "1234",
+            "required": true
+          }
         }
+      },
+      "vehicles": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "vin": {
+              "title": "VIN Number",
+              "type": "string",
+              "required": true
+            },
+            "maxRange": {
+              "type": "number",
+              "title": "Maximum Range (mi/km)",
+              "required": false
+            }
+          }
+        }
+      },
+      "remoteStart": {
+        "type": "object",
+        "properties": {
+          "airCtrl": {
+            "type": "boolean",
+            "title": "Turn on A/C",
+            "required": false,
+            "default": false
+          },
+          "heating1": {
+            "type": "boolean",
+            "title": "Turn on Heat",
+            "required": false,
+            "default": false
+          },
+          "defrost": {
+            "type": "boolean",
+            "title": "Defrost",
+            "required": false,
+            "default": false
+          },
+          "airTempvalue": {
+            "type": "number",
+            "title": "Desired temperature",
+            "required": false,
+            "placeholder": 72
+          },
+          "igniOnDuration": {
+            "type": "number",
+            "title": "How long (minutes)",
+            "required": true,
+            "default": 15
+          }
+        }
+      }
     }
+  }
 }

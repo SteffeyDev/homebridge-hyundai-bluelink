@@ -31,10 +31,10 @@ This is a Homebridge platform plugin that uses [bluelinky](https://github.com/Ha
             }
         ],
         "remoteStart": {
-            "cool": false,
-            "heat": false,
+            "airCtrl": false,
+            "heating1": false,
             "defrost": false,
-            "temperature": 72,
+            "airTempvalue": 72,
             "igniOnDuration": 15
         },
         "platform": "Hyundai"
