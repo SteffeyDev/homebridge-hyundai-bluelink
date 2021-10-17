@@ -1,9 +1,9 @@
-import { REGION } from "bluelinky/dist/constants";
+import { REGION } from 'bluelinky/dist/constants';
 import {
   Brand,
   VehicleStartOptions,
-} from "bluelinky/dist/interfaces/common.interfaces";
-import { PlatformConfig } from "homebridge";
+} from 'bluelinky/dist/interfaces/common.interfaces';
+import { PlatformConfig } from 'homebridge';
 
 interface AuthConfig {
   username: string;
