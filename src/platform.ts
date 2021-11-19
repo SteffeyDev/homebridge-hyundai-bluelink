@@ -15,8 +15,8 @@ import { HyundaiConfig } from './config';
 
 export class HyundaiPlatform implements DynamicPlatformPlugin {
   public readonly Service: typeof Service = this.api.hap.Service;
-  public readonly Characteristic: typeof Characteristic = this.api.hap
-    .Characteristic;
+  public readonly Characteristic: typeof Characteristic =
+    this.api.hap.Characteristic;
 
   // this is used to track restored cached accessories
   public readonly config: HyundaiConfig;
