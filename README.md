@@ -1,5 +1,7 @@
 # Homebridge Hyundai Bluelink
 
+###### *This project is looking for new ownership, I no longer have a Hyundai vehicle. Please open an issue if you are interested in helping.*
+
 [![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
 [![npm version](https://badge.fury.io/js/homebridge-hyundai-bluelink.svg)](https://badge.fury.io/js/homebridge-hyundai-bluelink)
 ![Build Status)](https://img.shields.io/github/workflow/status/athal7/homebridge-hyundai-bluelink/build/main)
