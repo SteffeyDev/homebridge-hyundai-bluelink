@@ -6,6 +6,10 @@
 
 This is a [Homebridge](https://homebridge.io) platform plugin that uses [bluelinky](https://github.com/Hacksore/bluelinky) to connect your Hyundai or Kia vehicle to HomeKit, which allows you control your vehicle using Siri, shortcuts, or the Home app.
 
+## Maintainer Needed
+
+I no longer use Homebridge/HOOBS, and thus cannot maintain this plugin. Reach out if you are interested.
+
 ## Installation
 
 This plugin can be installed from the Homebridge web console:
